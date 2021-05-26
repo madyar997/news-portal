@@ -18,6 +18,7 @@ public class News implements Serializable {
     public News() {
 
     }
+    //TODO fix Text data type
     public News(String title, Date createdDate, String text) {
         this.title = title;
         this.createdDate = createdDate;
