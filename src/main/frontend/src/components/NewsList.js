@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import parser from 'html-react-parser';
+import AuthService from '../services/authService'
 
 
 const NewsList = (props) => {
@@ -9,7 +10,16 @@ const NewsList = (props) => {
         props.getNewsId(id);
     }
 
+    const [currentUser, setCurrentUser] = useState(null);
+
+    useEffect(() => {
+        const user = AuthService.getCurrentUser();
+        setCurrentUser(user);
+    }, [])
+
+
     const renderNewsList = props.newsList.map((news) => {
+        console.log(currentUser);
         return (
             <div className='item'>
                 <div className='content'>
@@ -24,16 +34,17 @@ const NewsList = (props) => {
                     <div>{parser(news.text)}</div>
                     <div>{news.createdDate}</div>
                 </div>
-                <Link to={{ pathname: `/edit`, state: { news: news } }}>
+
+                {currentUser && currentUser.roles.includes('ROLE_ADMIN') ? <Link to={{ pathname: `/edit`, state: { news: news } }}>
                     <i
                         className="edit alternate outline icon"
                         style={{ color: "blue", marginTop: "7px" }}
                     ></i>
-                </Link>
+                </Link> : null}
 
-                <i className='trash alternate outline icon'
+                {currentUser && currentUser.roles.includes('ROLE_ADMIN') ?<i className='trash alternate outline icon'
                     style={{ color: 'red', marginTop: '7px' }}
-                    onClick={() => deleteNewsHandler(news.id)}></i>
+                    onClick={() => deleteNewsHandler(news.id)}></i> : null}
             </div>
         )
     })
@@ -41,9 +52,9 @@ const NewsList = (props) => {
     return (
         <div className='ui container' style={{ paddingTop: '20px' }}>
             <h3>News List nn
-                <Link to="/add">
+                { currentUser && currentUser.roles.includes('ROLE_ADMIN') ?<Link to="/add">
                     <button className="ui button green right">Add News</button>
-                </Link>
+                </Link>: null}
             </h3>
             <div className='ui celled list'>
                 {renderNewsList}
