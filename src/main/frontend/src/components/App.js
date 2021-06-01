@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
-import api from '../api/newsAPI';
+import newsApi from '../api/newsAPI';
 import Header from "./Header";
 import AddNews from "./AddNews";
 import NewsList from './NewsList';
@@ -10,6 +10,7 @@ import login from './login';
 import register from './register';
 import authHeader from '../services/authHeader';
 import NewsView from './NewsView';
+import Profile from './Profile';
 
 
 function App() {
@@ -17,8 +18,9 @@ function App() {
 
 
   const retrieveNews = async () => {
-    const response = await api.get('/all');
+    const response = await newsApi.get('/all');
     return response.data;
+
   }
 
 
@@ -28,13 +30,14 @@ function App() {
       ...news
     }
     console.log(request);
-    const response = await api.post('/add', request, { headers: authHeader() });
+    const response = await newsApi.post('/add', request, { headers: authHeader() });
     setNews([...newsList, response.data])
   }
 
 
+
   const removeNewsHandler = async (id) => {
-    await api.delete(`/delete/${id}`, { headers: authHeader() });
+    await newsApi.delete(`/delete/${id}`, { headers: authHeader() });
     const newNewsList = newsList.filter((news) => {
       return news.id !== id;
     });
@@ -42,8 +45,9 @@ function App() {
   }
 
 
+
   const updateNewsHandler = async (news) => {
-    const response = await api.put(`/edit/${news.id}`, news, { headers: authHeader() });
+    const response = await newsApi.put(`/edit/${news.id}`, news, { headers: authHeader() });
     const { id, title, text, createdDate } = response.data;
     setNews(
       newsList.map((news) => {
@@ -60,12 +64,14 @@ function App() {
     };
 
     getAllNews();
+
   }, []);
 
 
 
   return (
     <div className='ui container'>
+
       <Router>
         <Header />
         <Switch>
@@ -74,7 +80,8 @@ function App() {
               <NewsList
                 {...props}
                 newsList={newsList}
-                getNewsId={removeNewsHandler} />
+                getNewsId={removeNewsHandler}
+              />
             )} />
           <Route path='/add'
             render={(props) => <AddNews
@@ -89,7 +96,9 @@ function App() {
               />
             )}
           />
+          
           <Route exact path="/NewsView" component={NewsView} />
+          <Route exact path="/profile" component={Profile} />
           <Route exact path="/login" component={login} />
           <Route exact path="/register" component={register} />
           {/* <Route exact path="/profile" component={Profile} /> */}

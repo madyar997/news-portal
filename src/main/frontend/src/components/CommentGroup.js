@@ -1,42 +1,47 @@
 import React from 'react';
 import AddComment from './AddComment';
 import Comment from './Comment';
+import AuthService from '../services/authService'
+import commentAPI from '../api/commentAPI';
+import authHeader from '../services/authHeader';
 
 class CommentGroup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            comments: [
-                { id: 1, body: 'this is my first comment' },
-                { id: 2, body: 'this is my second comment' }
-            ]
+            comments:[],
+            currentUser: null,
         }
-        this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
+
     }
 
+    componentDidMount() {
+        const user = AuthService.getCurrentUser();
+        if (user) {
+            this.setState({
+                currentUser: user
+            });
+        }
+    }
+
+
     renderComments() {
-        // const { comments } = this.state;
-        console.log(this.props.comments);
-       return this.props.comments.map(comment => {
-            const { id, body } = comment;
+        
+        return this.props.comments.map(comment => {
+            const { id, body, createdDate } = comment;
+            const { username } = comment.user;
             return (
-               <Comment key={id} body={body}/>
+                <Comment key={id} body={body} username={username} />
             );
         });
     }
 
-    handleCommentSubmit(data) {
-        const postData = {
-            comment: data
-        }
-        // axios.post('/')
-        console.log(data);
-    }
+    
     render() {
         return (
             <div>
                 {this.renderComments()}
-                <AddComment handleCommentSubmit={this.handleCommentSubmit} />
+                {this.state.currentUser ? <AddComment currentUser={this.state.currentUser} handleCommentSubmit={this.props.handleCommentSubmit} /> : null}
             </div>
         )
     }

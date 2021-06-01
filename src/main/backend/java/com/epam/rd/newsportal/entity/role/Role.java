@@ -1,4 +1,4 @@
-package com.epam.rd.newsportal.entity;
+package com.epam.rd.newsportal.entity.role;
 
 import javax.persistence.*;
 

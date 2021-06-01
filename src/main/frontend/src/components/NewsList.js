@@ -21,12 +21,12 @@ const NewsList = (props) => {
     const renderNewsList = props.newsList.map((news) => {
         console.log(currentUser);
         return (
-            <div className='item'>
+            <div className='item' key={news.id}>
                 <div className='content'>
                     <div>{news.id}</div>
                     <div className='header'>
                         <h4>
-                            <Link to={{ pathname: `NewsView`, state: { news: news } }}>
+                            <Link to={{ pathname: `NewsView`, state: { news: news, user: currentUser} }}>
                                 {news.title}
                             </Link>
 
@@ -50,6 +50,7 @@ const NewsList = (props) => {
     })
 
     return (
+        
         <div className='ui container' style={{ paddingTop: '20px' }}>
             <h3>News List nn
                 { currentUser && currentUser.roles.includes('ROLE_ADMIN') ?<Link to="/add">

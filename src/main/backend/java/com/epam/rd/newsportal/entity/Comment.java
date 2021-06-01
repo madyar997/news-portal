@@ -1,8 +1,8 @@
 package com.epam.rd.newsportal.entity;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -14,15 +14,23 @@ public class Comment implements Serializable {
     private Long id;
     private String body;
     private Date createdDate;
-    private String Author;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "news_id")
+    private News news;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Comment() {
     }
 
-    public Comment(String body, Date createdDate, String author) {
+    public Comment(String body, Date createdDate, News news, User user) {
         this.body = body;
         this.createdDate = createdDate;
-        Author = author;
+        this.news = news;
+        this.user = user;
     }
 
     public Long getId() {
@@ -32,6 +40,7 @@ public class Comment implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
 
     public String getBody() {
         return body;
@@ -49,12 +58,21 @@ public class Comment implements Serializable {
         this.createdDate = createdDate;
     }
 
-    public String getAuthor() {
-        return Author;
+    public Long getNews() {
+        return news.getId();
     }
 
-    public void setAuthor(String author) {
-        Author = author;
+    public void setNews(News news) {
+        this.news = news;
+    }
+
+
+    public String getUser() {
+        return user.getUsername();
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -62,11 +80,11 @@ public class Comment implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Comment comment = (Comment) o;
-        return Objects.equals(id, comment.id) && Objects.equals(body, comment.body) && Objects.equals(createdDate, comment.createdDate) && Objects.equals(Author, comment.Author);
+        return Objects.equals(id, comment.id) && Objects.equals(body, comment.body) && Objects.equals(createdDate, comment.createdDate) && Objects.equals(news, comment.news) && Objects.equals(user, comment.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, body, createdDate, Author);
+        return Objects.hash(id, body, createdDate, news, user);
     }
 }

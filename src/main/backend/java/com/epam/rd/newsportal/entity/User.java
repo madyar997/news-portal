@@ -1,5 +1,6 @@
 package com.epam.rd.newsportal.entity;
 
+import com.epam.rd.newsportal.entity.role.Role;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;

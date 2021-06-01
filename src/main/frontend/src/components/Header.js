@@ -39,7 +39,7 @@ class Header extends Component {
                     {currentUser && (
                         <div className='right menu'>
                             <li className='ui item'>
-                                <Link to={"/user"}>User</Link>
+                                <Link to={"/profile"}>User</Link>
                             </li>
                         </div>
 

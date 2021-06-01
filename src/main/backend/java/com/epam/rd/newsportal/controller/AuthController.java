@@ -6,8 +6,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 
-import com.epam.rd.newsportal.entity.ERole;
-import com.epam.rd.newsportal.entity.Role;
+import com.epam.rd.newsportal.entity.role.ERole;
+import com.epam.rd.newsportal.entity.role.Role;
 import com.epam.rd.newsportal.entity.User;
 import com.epam.rd.newsportal.payload.request.LoginRequest;
 import com.epam.rd.newsportal.payload.request.SignupRequest;

@@ -1,7 +1,7 @@
 package com.epam.rd.newsportal.repository;
 
-import com.epam.rd.newsportal.entity.ERole;
-import com.epam.rd.newsportal.entity.Role;
+import com.epam.rd.newsportal.entity.role.ERole;
+import com.epam.rd.newsportal.entity.role.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

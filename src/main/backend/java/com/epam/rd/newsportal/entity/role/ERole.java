@@ -1,4 +1,4 @@
-package com.epam.rd.newsportal.entity;
+package com.epam.rd.newsportal.entity.role;
 
 public enum ERole {
   ROLE_USER,
