@@ -2,8 +2,6 @@ import React from 'react';
 import AddComment from './AddComment';
 import Comment from './Comment';
 import AuthService from '../services/authService'
-import commentAPI from '../api/commentAPI';
-import authHeader from '../services/authHeader';
 
 class CommentGroup extends React.Component {
     constructor(props) {
@@ -12,7 +10,6 @@ class CommentGroup extends React.Component {
             comments:[],
             currentUser: null,
         }
-
     }
 
     componentDidMount() {
@@ -26,12 +23,10 @@ class CommentGroup extends React.Component {
 
 
     renderComments() {
-        
+        console.log(this.props.comments)
         return this.props.comments.map(comment => {
-            const { id, body, createdDate } = comment;
-            const { username } = comment.user;
-            return (
-                <Comment key={id} body={body} username={username} />
+                        return (
+                <Comment key={comment.id} comment={comment} />
             );
         });
     }

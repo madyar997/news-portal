@@ -11,6 +11,8 @@ import register from './register';
 import authHeader from '../services/authHeader';
 import NewsView from './NewsView';
 import Profile from './Profile';
+import AdminPanel from './admin/AdminPanel';
+import AboutUs from './AboutUs';
 
 
 function App() {
@@ -44,8 +46,6 @@ function App() {
     setNews(newNewsList);
   }
 
-
-
   const updateNewsHandler = async (news) => {
     const response = await newsApi.put(`/edit/${news.id}`, news, { headers: authHeader() });
     const { id, title, text, createdDate } = response.data;
@@ -71,7 +71,6 @@ function App() {
 
   return (
     <div className='ui container'>
-
       <Router>
         <Header />
         <Switch>
@@ -101,7 +100,8 @@ function App() {
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/login" component={login} />
           <Route exact path="/register" component={register} />
-          {/* <Route exact path="/profile" component={Profile} /> */}
+          <Route exact path="/admin" component={AdminPanel} />
+          <Route exact path="/about" component={AboutUs} />
         </Switch>
       </Router>
     </div>

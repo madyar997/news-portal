@@ -30,7 +30,8 @@ public class CommentController {
     }
 
     @PostMapping("/{newsId}/{userId}")
-    public ResponseEntity<Comment> addNews(@RequestBody CommentRequest commentRequest,
+    public ResponseEntity<Comment> addNews(@Curreent User user,
+                                           @RequestBody CommentRequest commentRequest,
                                            @PathVariable(name = "newsId") Long newsId,
                                            @PathVariable(name = "userId") Long userId) {
         Comment newComment = commentService.addComment(commentRequest, newsId, userId);

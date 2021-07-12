@@ -15,7 +15,7 @@ public class Comment implements Serializable {
     private String body;
     private Date createdDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "news_id")
     private News news;
 

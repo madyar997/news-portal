@@ -4,7 +4,6 @@ import CommentGroup from './CommentGroup';
 import commentAPI from '../api/commentAPI';
 import authHeader from '../services/authHeader';
 
-
 class NewsView extends Component {
 
   constructor(props) {
@@ -15,7 +14,8 @@ class NewsView extends Component {
       comments: [],
     }
     console.log(news);
-    console.log(user)
+    console.log(user);
+    this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -29,11 +29,13 @@ class NewsView extends Component {
     const request = {
       body: data
     }
+    var newComments = this.state.comments;
     console.log(request)
-    const response = await commentAPI.post(`/${this.props.newsId}/${this.props.userId}`, request, { headers: authHeader() })
-    this.setState({ comments: response.data })
-
+    const response = await commentAPI.post(`/${this.props.location.state.news.id}/${this.props.location.state.user.id}`, request)
+    newComments.push(response.data);
+    this.setState({comments:newComments});
   }
+
   async retrieveComments() {
     const response = await commentAPI.get(`/${this.props.location.state.news.id}`, { headers: authHeader() });
     return response.data;
@@ -45,10 +47,8 @@ class NewsView extends Component {
         <ul>{this.props.location.state.news.id}</ul>
         <ul>{this.props.location.state.news.title}</ul>
         <ul>{parser(this.props.location.state.news.text)}</ul>
-
-        <CommentGroup comments={this.state.comments} news={this.props.location.state.news.id} userId={this.props.location.state.user.id} handleCommentSubmit={this.handleCommentSubmit()} />
+        <CommentGroup comments={this.state.comments} handleCommentSubmit={this.handleCommentSubmit} />
       </div>
-
     )
   }
 

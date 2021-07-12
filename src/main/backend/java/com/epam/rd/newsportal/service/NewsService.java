@@ -4,6 +4,8 @@ import com.epam.rd.newsportal.entity.News;
 import com.epam.rd.newsportal.exception.NewsNotFoundException;
 import com.epam.rd.newsportal.repository.NewsRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +15,10 @@ import java.util.List;
 public class NewsService {
     private final NewsRepository newsRepository;
 
+    private static final Logger logger = LoggerFactory.getLogger(NewsService.class);
+
     public News addNews(News news){
+        logger.debug("inside add News method ");
         return newsRepository.save(news);
     }
 

@@ -81,8 +81,8 @@ export default class Login extends Component {
 
     render() {
         return (
-            <div className='ui container'>
-                <div className='ui form'>
+            <div className='ui container' style={{marginTop: '40px'}}>
+                <div className='ui form centered'>
                     <Form
                         onSubmit={this.handleLogin}
                         ref={c => {

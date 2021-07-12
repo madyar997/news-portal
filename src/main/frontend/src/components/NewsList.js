@@ -52,11 +52,12 @@ const NewsList = (props) => {
     return (
         
         <div className='ui container' style={{ paddingTop: '20px' }}>
-            <h3>News List nn
+            <h3>
                 { currentUser && currentUser.roles.includes('ROLE_ADMIN') ?<Link to="/add">
                     <button className="ui button green right">Add News</button>
                 </Link>: null}
             </h3>
+            <b/><b/><b/>
             <div className='ui celled list'>
                 {renderNewsList}
             </div>
