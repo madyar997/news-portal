@@ -2,8 +2,12 @@ package com.epam.rd.newsportal.entity;
 
 import com.epam.rd.newsportal.entity.role.Role;
 import com.sun.istack.NotNull;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,6 +31,9 @@ public class User {
 
 	@NotNull
 	private String password;
+
+	@NotNull
+	private boolean isActive;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(	name = "user_roles", 
@@ -55,6 +62,7 @@ public class User {
 		return username;
 	}
 
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -81,5 +89,13 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean active) {
+		isActive = active;
 	}
 }

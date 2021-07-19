@@ -28,6 +28,8 @@ public class CommentService {
     @Autowired
     private final NewsRepository newsRepository;
 
+
+
     public List<Comment> getComments(Long newsId) {
         return commentRepository.findByNewsId(newsId);
     }

@@ -4,8 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-
 import com.epam.rd.newsportal.entity.role.ERole;
 import com.epam.rd.newsportal.entity.role.Role;
 import com.epam.rd.newsportal.entity.User;
@@ -121,7 +119,7 @@ public class AuthController {
 				}
 			});
 		}
-
+		user.setActive(true);
 		user.setRoles(roles);
 		userRepository.save(user);
 

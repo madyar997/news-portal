@@ -62,7 +62,6 @@ const NewsList = (props) => {
                 {renderNewsList}
             </div>
         </div>
-
     );
 }
 
