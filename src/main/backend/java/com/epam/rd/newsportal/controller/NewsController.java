@@ -37,6 +37,8 @@ public class NewsController {
         return new ResponseEntity<>(news, HttpStatus.OK);
     }
 
+
+
     @PostMapping("/add")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<News> addNews(@RequestBody News news){
