@@ -11,15 +11,23 @@ public class News implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
-    private Date createdDate;
+    private String createdDate;
     @Column(name="text", columnDefinition="TEXT")
     private String Text;
 
     public News() {
 
     }
+
+    public News(Long id, String title, String createdDate, String text) {
+        this.id = id;
+        this.title = title;
+        this.createdDate = createdDate;
+        Text = text;
+    }
+
     //TODO fix Text data type
-    public News(String title, Date createdDate, String text) {
+    public News(String title, String createdDate, String text) {
         this.title = title;
         this.createdDate = createdDate;
         Text = text;
@@ -43,11 +51,11 @@ public class News implements Serializable {
         this.title = title;
     }
 
-    public Date getCreatedDate() {
+    public String getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
     }
 

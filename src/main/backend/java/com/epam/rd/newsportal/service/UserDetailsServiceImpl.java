@@ -3,6 +3,7 @@ package com.epam.rd.newsportal.service;
 import com.epam.rd.newsportal.entity.User;
 import com.epam.rd.newsportal.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

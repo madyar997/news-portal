@@ -20,13 +20,6 @@ public class NewsController {
 
     public final NewsService newsService;
 
-
-    @GetMapping("/all")
-    public ResponseEntity<List<News>> getAllNews(){
-        List<News> news = newsService.getNews();
-        return new ResponseEntity<>(news, HttpStatus.OK);
-    }
-
     @GetMapping("/find/{id}")
     public ResponseEntity<News> getNews(@PathVariable("id") Long id){
         News news = null;
@@ -37,6 +30,14 @@ public class NewsController {
         }
         return new ResponseEntity<>(news, HttpStatus.OK);
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<News>> getAllNews(){
+        List<News> news = newsService.getNews();
+        return new ResponseEntity<>(news, HttpStatus.OK);
+    }
+
+
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('ROLE_ADMIN')")

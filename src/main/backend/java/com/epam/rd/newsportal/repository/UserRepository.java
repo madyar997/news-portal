@@ -23,6 +23,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
   @Query("UPDATE User u SET u.isActive = false WHERE u.id= :id")
   void deactivateUserById(@Param("id") Long id);
 
+  //TODO get ordered users with HQL
 
 
 }

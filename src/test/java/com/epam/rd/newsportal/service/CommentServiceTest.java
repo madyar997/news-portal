@@ -12,12 +12,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
 class CommentServiceTest {
 
     CommentService commentService;
-
     @Mock
     CommentRepository commentRepository;
     @Mock
@@ -34,7 +35,7 @@ class CommentServiceTest {
 
 //TODO change names
     @Test
-    void getComments() {
+    void shouldReturnCommentsList() {
         Comment comment = new Comment();
         ArrayList<Comment> commentData = new ArrayList<>();
         commentData.add(comment);
